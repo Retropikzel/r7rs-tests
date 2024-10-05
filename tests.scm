@@ -1,3 +1,2 @@
 (define tests
-  '(((name . "r7rs-test")
-     (file . "r7rs-tests.scm"))))
+  '(((name . "r7rs-test") (file . "r7rs-tests.scm"))))

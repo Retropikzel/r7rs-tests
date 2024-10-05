@@ -18,6 +18,8 @@
             ((string=? name "chicken")
              (string-append
                " ls "
+               " && cp snow/chibi/term/ansi.sld snow.chibi.term.ansi.sld"
+               " && " (cdr library-command) " snow.chibi.term.ansi.sld"
                " && cp snow/chibi/optional.sld snow.chibi.optional.sld"
                " && " (cdr library-command) " snow.chibi.optional.sld"
                " && cp snow/chibi/diff.sld snow.chibi.diff.sld"
@@ -27,6 +29,7 @@
                ))
             (else (string-append
                     " ls "
+                    " && " (cdr library-command) " snow/chibi/term/ansi" (if (string=? name "gambit") "" ".sld")
                     " && " (cdr library-command) " snow/chibi/optional" (if (string=? name "gambit") "" ".sld")
                     " && " (cdr library-command) " snow/chibi/diff" (if (string=? name "gambit") "" ".sld")
                     " && " (cdr library-command) " snow/chibi/test" (if (string=? name "gambit") "" ".sld")
@@ -76,8 +79,8 @@
             (lambda (test)
               (execute jenkinsfile-job
                        `((command . ,(full-command implementation test))
-                         (library-command . ,(full-library-command implementation test))
-                       out)))
+                         (library-command . ,(full-library-command implementation test)))
+                       out))
             tests)
           (execute jenkinsfile-job-bottom `((name . ,(cdr (assoc 'name implementation)))) out)
           (newline out)))
