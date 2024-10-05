@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -euxo
+
+rm -rf snow/srfi
+mkdir -p snow/srfi
+cd snow/srfi || exit 1
+wget https://raw.githubusercontent.com/srfi-explorations/r7rs-srfi/refs/heads/main/srfi/1.scm
+wget https://raw.githubusercontent.com/srfi-explorations/r7rs-srfi/refs/heads/main/srfi/1.sld
+wget https://raw.githubusercontent.com/srfi-explorations/r7rs-srfi/refs/heads/main/srfi/8.scm
+wget https://raw.githubusercontent.com/srfi-explorations/r7rs-srfi/refs/heads/main/srfi/8.sld

@@ -1,0 +1,4 @@
+#/bin/sh
+
+rm -rf r7rs-tests.scm
+wget https://raw.githubusercontent.com/ashinn/chibi-scheme/refs/heads/master/tests/r7rs-tests.scm

@@ -1,0 +1,4 @@
+test-{{name}}-{{test-name}}:
+	{{#library-command}}docker run -it -v ${PWD}:/workdir:z schemers/{{name}} bash -c "cd workdir && {{{library-command}}}"{{/library-command}}
+	docker run -it -v ${PWD}:/workdir:z schemers/{{name}} bash -c "cd workdir && {{{command}}}"
+
