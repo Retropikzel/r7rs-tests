@@ -1,0 +1,5 @@
+(define-library (example)
+  (import (scheme base)
+          (rename (except (chibi test) test-equal)
+                  (test test-equal)))
+  (include "example.scm"))
