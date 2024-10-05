@@ -26,7 +26,9 @@
           ((looper
              (lambda (line count lines)
                (if (eof-object? line)
-                 (list-tail lines (- (length lines) linecount))
+                 (if (< (length lines) linecount)
+                   (list)
+                   (list-tail lines (- (length lines) linecount)))
                  (looper (read-line) (+ count 1) (append lines (list line)))))))
           (looper (read-line) 0 (list)))))))
 

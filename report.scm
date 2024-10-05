@@ -68,8 +68,6 @@
                                          (lambda (line)
                                            (string-append line "</br>"))
                                          results))))
-                (write results)
-                (newline)
                 (execute report-row
                          `((name . ,name)
                            (command . ,command)
