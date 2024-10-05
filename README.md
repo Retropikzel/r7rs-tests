@@ -1,4 +1,4 @@
-Running different R7RS tests on different implementations
+Running different R7RS conformance tests on different implementations
 
 - [r7rs-tests-1](https://github.com/ashinn/chibi-scheme/blob/master/tests/r7rs-tests.scm)
     - Chibi Schemes r7rs tests

@@ -485,8 +485,8 @@ pipeline {
                         keepAll: true,
                         reportDir: 'reports',
                         reportFiles: '*.html,*.css',
-                        reportName: 'R7RS-SRFI Test Report',
-                        reportTitles: 'R7RS-SRFI Test Report'])
+                        reportName: 'R7RS Conformance Test Report',
+                        reportTitles: 'R7RS Conformance Test Report'])
                 }
             }
         }
