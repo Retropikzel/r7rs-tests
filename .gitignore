@@ -14,5 +14,4 @@ srfi-*.sld
 srfi.*.scm
 srfi.*.sld
 reports
-r7rs-tests.scm
 snow.*
