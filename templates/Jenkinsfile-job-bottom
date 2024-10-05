@@ -1,3 +1,4 @@
+                    sh 'cat *.log'
                     sh 'for f in *.log; do cp -- "$f" "reports/{{name}}-$f"; done'
                     sh 'ls reports'
                     stash name: 'reports', includes: 'reports/*'
