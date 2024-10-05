@@ -3,13 +3,14 @@
   (cond-expand
 
    (chibi
-    (import (rename (except (chibi test) test-equal)
-                    (test test-equal))))
+    (import (except (chibi test) test-equal)))
 
    (gambit
-    (import (_test)))
+    (import (rename (_test)
+                    (test-equal test))))
 
    (gauche
-    (import (srfi 64))))
+    (import (rename (srfi 64)
+                    (test-equal test)))))
 
   (include "example.scm"))
