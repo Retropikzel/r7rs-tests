@@ -78,7 +78,8 @@
           (for-each
             (lambda (test)
               (execute jenkinsfile-job
-                       `((command . ,(full-command implementation test))
+                       `((command . ,(string-append (full-command implementation test)
+                                                    "> " (cdr (assoc 'name test)) ".log"))
                          (library-command . ,(full-library-command implementation test)))
                        out))
             tests)
