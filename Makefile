@@ -4,7 +4,7 @@ test-chibi-r7rs-test:
 
 
 test-chicken-r7rs-test:
-	docker run -it -v ${PWD}:/workdir:z schemers/chicken bash -c "cd workdir &&  ls  && cp snow/chibi/term/ansi.sld snow.chibi.term.ansi.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.term.ansi.sld && cp snow/chibi/optional.sld snow.chibi.optional.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.optional.sld && cp snow/chibi/diff.sld snow.chibi.diff.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.diff.sld && cp snow/chibi/test.sld snow.chibi.test.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.test.sld"
+	docker run -it -v ${PWD}:/workdir:z schemers/chicken bash -c "cd workdir &&  ls  && cp snow/chibi/term/ansi.sld snow.chibi.term.ansi.sld && csc -include-path ./snow/chibi -include-path ./snow/chibi/term -X r7rs -R r7rs -s -J snow.chibi.term.ansi.sld && cp snow/chibi/optional.sld snow.chibi.optional.sld && csc -include-path ./snow/chibi -include-path ./snow/chibi/term -X r7rs -R r7rs -s -J snow.chibi.optional.sld && cp snow/chibi/diff.sld snow.chibi.diff.sld && csc -include-path ./snow/chibi -include-path ./snow/chibi/term -X r7rs -R r7rs -s -J snow.chibi.diff.sld && cp snow/chibi/test.sld snow.chibi.test.sld && csc -include-path ./snow/chibi -include-path ./snow/chibi/term -X r7rs -R r7rs -s -J snow.chibi.test.sld"
 	docker run -it -v ${PWD}:/workdir:z schemers/chicken bash -c "cd workdir && csc -include-path ./snow/chibi -X r7rs -R r7rs r7rs-tests.scm && ./r7rs-test && rm r7rs-test"
 
 
@@ -30,7 +30,7 @@ test-guile-r7rs-test:
 
 test-kawa-r7rs-test:
 	
-	docker run -it -v ${PWD}:/workdir:z schemers/kawa bash -c "cd workdir && kawa --r7rs -Dkawa.import.path=..:../snow:*.sld:./snow/chibi/*.sld:./snow/chibi/term/*.sld r7rs-tests.scm"
+	docker run -it -v ${PWD}:/workdir:z schemers/kawa bash -c "cd workdir && kawa --r7rs -Dkawa.import.path=./snow/chibi/*.sld:./snow/srfi/*.sld r7rs-tests.scm"
 
 
 test-loko-r7rs-test:
@@ -50,7 +50,7 @@ test-sagittarius-r7rs-test:
 
 test-stklos-r7rs-test:
 	
-	docker run -it -v ${PWD}:/workdir:z schemers/stklos bash -c "cd workdir && stklos -I . r7rs-tests.scm"
+	docker run -it -v ${PWD}:/workdir:z schemers/stklos bash -c "cd workdir && stklos -I ./snow r7rs-tests.scm"
 
 
 test-skint-r7rs-test:

@@ -98,7 +98,7 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    sh ' ls  && cp snow/chibi/term/ansi.sld snow.chibi.term.ansi.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.term.ansi.sld && cp snow/chibi/optional.sld snow.chibi.optional.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.optional.sld && cp snow/chibi/diff.sld snow.chibi.diff.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.diff.sld && cp snow/chibi/test.sld snow.chibi.test.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.test.sld'
+                    sh ' ls  && cp snow/chibi/term/ansi.sld snow.chibi.term.ansi.sld && csc -include-path ./snow/chibi -include-path ./snow/chibi/term -X r7rs -R r7rs -s -J snow.chibi.term.ansi.sld && cp snow/chibi/optional.sld snow.chibi.optional.sld && csc -include-path ./snow/chibi -include-path ./snow/chibi/term -X r7rs -R r7rs -s -J snow.chibi.optional.sld && cp snow/chibi/diff.sld snow.chibi.diff.sld && csc -include-path ./snow/chibi -include-path ./snow/chibi/term -X r7rs -R r7rs -s -J snow.chibi.diff.sld && cp snow/chibi/test.sld snow.chibi.test.sld && csc -include-path ./snow/chibi -include-path ./snow/chibi/term -X r7rs -R r7rs -s -J snow.chibi.test.sld'
                     sh 'csc -include-path ./snow/chibi -X r7rs -R r7rs r7rs-tests.scm && ./r7rs-test && rm r7rs-test'
                     sh 'for f in *.log; do cp -- "$f" "reports/chicken-$f"; done'
                     sh 'ls reports'
@@ -259,7 +259,7 @@ pipeline {
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
                     
-                    sh 'kawa --r7rs -Dkawa.import.path=..:../snow:*.sld:./snow/chibi/*.sld:./snow/chibi/term/*.sld r7rs-tests.scm'
+                    sh 'kawa --r7rs -Dkawa.import.path=./snow/chibi/*.sld:./snow/srfi/*.sld r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/kawa-$f"; done'
                     sh 'ls reports'
                     stash name: 'reports', includes: 'reports/*'
@@ -387,7 +387,7 @@ pipeline {
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
                     
-                    sh 'stklos -I . r7rs-tests.scm'
+                    sh 'stklos -I ./snow r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/stklos-$f"; done'
                     sh 'ls reports'
                     stash name: 'reports', includes: 'reports/*'
