@@ -77,11 +77,13 @@
                                        (string-append "schemers/" name)))) out)
           (for-each
             (lambda (test)
-              (execute jenkinsfile-job
-                       `((command . ,(string-append (full-command implementation test)
-                                                    "> " (cdr (assoc 'name test)) ".log"))
-                         (library-command . ,(full-library-command implementation test)))
-                       out))
+              (let ((test-name (cdr (assoc 'name test))))
+                (execute jenkinsfile-job
+                         `((command . ,(string-append (full-command implementation test)
+                                                      "> " test-name ".log"))
+                           (log-command . ,(string-append "cat " test-name ".log"))
+                           (library-command . ,(full-library-command implementation test)))
+                         out)))
             tests)
           (execute jenkinsfile-job-bottom `((name . ,(cdr (assoc 'name implementation)))) out)
           (newline out)))

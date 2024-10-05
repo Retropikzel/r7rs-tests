@@ -1,2 +1,3 @@
                     {{#library-command}}sh '{{{library-command}}}'{{/library-command}}
                     sh '{{{command}}}'
+                    sh '{{{log-command}}}'
