@@ -27,10 +27,10 @@
     (newline out)
     (display "<th>Test</th>" out)
     (for-each
-      (lambda (implementation)
-        (display (string-append "<th>" (cdr (assoc 'name implementation)) "</th>") out)
+      (lambda (test)
+        (display (string-append "<th>" (cdr (assoc 'name test)) "</th>") out)
         (newline out))
-      implementations)
+      tests)
     (display "</tr>" out)
     (newline out)
     (newline out)
