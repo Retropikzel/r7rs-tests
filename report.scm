@@ -62,7 +62,7 @@
                         (results
                           (if (file-exists? logfile)
                             (file-tail logfile 3)
-                            (list)))
+                            (list "Could not run tests")))
                         (result (apply string-append
                                        (map
                                          (lambda (line)
