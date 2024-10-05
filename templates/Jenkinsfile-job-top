@@ -20,4 +20,3 @@
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
