@@ -66,7 +66,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     
                     sh 'chibi-scheme -I ./snow r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/chibi-$f"; done'
@@ -99,7 +98,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     sh ' ls  && cp snow/chibi/term/ansi.sld snow.chibi.term.ansi.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.term.ansi.sld && cp snow/chibi/optional.sld snow.chibi.optional.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.optional.sld && cp snow/chibi/diff.sld snow.chibi.diff.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.diff.sld && cp snow/chibi/test.sld snow.chibi.test.sld && csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J snow.chibi.test.sld'
                     sh 'csc -include-path ./snow/chibi -X r7rs -R r7rs r7rs-tests.scm && ./r7rs-test && rm r7rs-test'
                     sh 'for f in *.log; do cp -- "$f" "reports/chicken-$f"; done'
@@ -132,7 +130,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     sh ' ls  && cyclone -A . snow/chibi/term/ansi.sld && cyclone -A . snow/chibi/optional.sld && cyclone -A . snow/chibi/diff.sld && cyclone -A . snow/chibi/test.sld'
                     sh 'cyclone -A . r7rs-tests.scm && ./r7rs-test && rm r7rs-test'
                     sh 'for f in *.log; do cp -- "$f" "reports/cyclone-$f"; done'
@@ -165,7 +162,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     sh ' ls  && gsc . snow/chibi/term/ansi && gsc . snow/chibi/optional && gsc . snow/chibi/diff && gsc . snow/chibi/test'
                     sh 'gsc -exe . -nopreload r7rs-tests.scm && ./r7rs-test && rm r7rs-test'
                     sh 'for f in *.log; do cp -- "$f" "reports/gambit-$f"; done'
@@ -198,7 +194,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     
                     sh 'gosh -r7 -A ./snow r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/gauche-$f"; done'
@@ -231,7 +226,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     
                     sh 'guile --fresh-auto-compile --r7rs -L . -L ./snow r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/guile-$f"; done'
@@ -264,7 +258,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     
                     sh 'kawa --r7rs -Dkawa.import.path=..:../snow:*.sld:./snow/chibi/*.sld:./snow/chibi/term/*.sld r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/kawa-$f"; done'
@@ -297,7 +290,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     sh ' ls  && ls snow/chibi/term/ansi.sld && ls snow/chibi/optional.sld && ls snow/chibi/diff.sld && ls snow/chibi/test.sld'
                     sh 'LOKO_LIBRARY_PATH=./snow loko -std=r7rs --compile r7rs-tests.scm && ./r7rs-test && rm r7rs-test'
                     sh 'for f in *.log; do cp -- "$f" "reports/loko-$f"; done'
@@ -330,7 +322,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     
                     sh 'mit-scheme --load r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/mit-scheme-$f"; done'
@@ -363,7 +354,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     
                     sh 'sash -r7 -L ./snow r7rs-tests.scm > r7rs-test.log && cat r7rs-test.log'
                     sh 'for f in *.log; do cp -- "$f" "reports/sagittarius-$f"; done'
@@ -396,7 +386,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     
                     sh 'stklos -I . r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/stklos-$f"; done'
@@ -429,7 +418,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     
                     sh 'skint --program r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/skint-$f"; done'
@@ -462,7 +450,6 @@ pipeline {
                     sh 'find . -name "*.so" -delete'
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
-                    unstash 'tests'
                     
                     sh 'tr7i r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/tr7-$f"; done'
