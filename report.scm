@@ -35,8 +35,7 @@
     (newline out)
     (for-each
       (lambda (test)
-        (let ((test-name (cdr (assoc 'name test)))
-              (name (symbol->string (cdr (assoc 'name implementation)))))
+        (let ((test-name (cdr (assoc 'name test))))
           (display (string-append "<tr>") out)
           (newline out)
           (display (string-append "<td>" test-name "</td>") out)
@@ -46,7 +45,7 @@
               (letrec* ((name (cdr (assoc 'name implementation)))
                         (command (cdr (assoc 'command implementation)))
                         (logfile (string-append "reports/"
-                                                name
+                                                (cdr (assoc 'name implementation))
                                                 "-"
                                                 test-name
                                                 ".log"))
