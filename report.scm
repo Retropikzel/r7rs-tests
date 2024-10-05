@@ -35,7 +35,7 @@
     (newline out)
     (for-each
       (lambda (test)
-        (let ((test-name (symbol->string (cdr (assoc 'name test))))
+        (let ((test-name (cdr (assoc 'name test)))
               (name (symbol->string (cdr (assoc 'name implementation)))))
           (display (string-append "<tr>") out)
           (newline out)
