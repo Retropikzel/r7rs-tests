@@ -45,7 +45,7 @@
               (letrec* ((name (cdr (assoc 'name implementation)))
                         (command (cdr (assoc 'command implementation)))
                         (logfile (string-append "reports/"
-                                                (cdr (assoc 'name implementation))
+                                                (symbol->string (cdr (assoc 'name implementation)))
                                                 "-"
                                                 test-name
                                                 ".log"))
