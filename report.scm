@@ -28,25 +28,25 @@
     (display "<th>Test</th>" out)
     (for-each
       (lambda (implementation)
-        (display (string-append "<th>" (symbol->string (cdr (assoc 'name implementation))) "</th>") out)
+        (display (string-append "<th>" (cdr (assoc 'name implementation)) "</th>") out)
         (newline out))
       implementations)
     (display "</tr>" out)
     (newline out)
     (newline out)
     (for-each
-      (lambda (test)
-        (let ((test-name (cdr (assoc 'name test))))
+      (lambda (implementation)
+        (let ((name (cdr (assoc 'name implementation))))
           (display (string-append "<tr>") out)
           (newline out)
-          (display (string-append "<td>" test-name "</td>") out)
+          (display (string-append "<td>" name "</td>") out)
           (newline out)
           (for-each
-            (lambda (implementation)
-              (letrec* ((name (cdr (assoc 'name implementation)))
+            (lambda (test)
+              (letrec* ((test-name (cdr (assoc 'name test)))
                         (command (cdr (assoc 'command implementation)))
                         (logfile (string-append "reports/"
-                                                (symbol->string (cdr (assoc 'name implementation)))
+                                                name
                                                 "-"
                                                 test-name
                                                 ".log"))
@@ -78,8 +78,8 @@
                            (result . ,result))
                          out)
                 (newline out)))
-            implementations)
+            tests)
           (display (string-append "</tr>") out)))
-      tests)
+      implementations)
     (execute report-bottom '() out)
     (newline out)))

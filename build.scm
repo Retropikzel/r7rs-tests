@@ -11,7 +11,7 @@
 
 (define full-library-command
   (lambda (implementation test)
-    (let* ((name (symbol->string (cdr (assoc 'name implementation))))
+    (let* ((name (cdr (assoc 'name implementation)))
            (library-command (assoc 'library-command implementation)))
       (cond ((not library-command) #f)
             ; Note that Chicken needs to have the SRFI library as srfi-N.scm in same folder
@@ -37,7 +37,7 @@
 
 (define full-command
   (lambda (implementation test)
-    (let* ((name (symbol->string (cdr (assoc 'name implementation))))
+    (let* ((name (cdr (assoc 'name implementation)))
            (test-name (cdr (assoc 'name test)))
            (test-file (cdr (assoc 'file test)))
            (command
@@ -69,7 +69,7 @@
     (newline out)
     (for-each
       (lambda (implementation)
-        (let ((name (symbol->string (cdr (assoc 'name implementation)))))
+        (let ((name (cdr (assoc 'name implementation))))
           (execute jenkinsfile-job-top
                    `((name . ,name)
                      (dockerimage . ,(if (assoc 'docker-image implementation)
@@ -103,7 +103,7 @@
       (lambda (test)
           (for-each
             (lambda (implementation)
-              (let* ((name (symbol->string (cdr (assoc 'name implementation)))))
+              (let* ((name (cdr (assoc 'name implementation))))
                 (execute makefile-job
                          `((name . ,name)
                            (test-name . ,(cdr (assoc 'name test)))
