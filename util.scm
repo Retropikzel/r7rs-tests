@@ -17,6 +17,20 @@
     (and (>= (string-length str) (string-length prefix))
          (string=? (string-copy str 0 (string-length prefix)) prefix))))
 
+(define file-tail
+  (lambda (path linecount)
+    (with-input-from-file
+      path
+      (lambda ()
+        (letrec
+          ((looper
+             (lambda (line count lines)
+               (if (eof-object? line)
+                 (list-tail lines (- (length lines) linecount))
+                 (looper (read-line) (+ count 1) (append lines (list line)))))))
+          (looper (read-line) 0 (list)))))))
+
+
 (define number-of-line->number
   (lambda (str)
     (letrec

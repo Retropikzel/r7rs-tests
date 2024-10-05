@@ -4,6 +4,7 @@
         (scheme char)
         (scheme process-context)
         (scheme file)
+        (srfi 13)
         (arvyy mustache))
 
 (include "util.scm")
@@ -53,37 +54,30 @@
                                         (if (eof-object? line)
                                           results
                                           (read-results (read-line)
-                                                        (if (string-starts-with? line "# of")
+                                                        (if (string-contains line " out of ")
                                                           (begin
                                                             (append results
-                                                                    (list (number-of-line->number line))))
+                                                                    (list line)))
                                                           results)))))
-                        (results (if (not (file-exists? logfile))
-                                   (list "" "" "" "")
-                                   (with-input-from-file
-                                     logfile
-                                     (lambda ()
-                                       (read-results (read-line) (list))))))
-                        (expected-passes (if (> (length results) 0) (list-ref results 0) 0))
-                        (expected-failures (if (> (length results) 1) (list-ref results 1) 0))
-                        (unexpected-failures (if (> (length results) 2) (list-ref results 2) 0))
-                        (skipped-tests (if (> (length results) 3) (list-ref results 3) 0))
-                        (color (cond ((string? expected-passes) "white") ; No logfile
-                                     ((> unexpected-failures 0) "red")
-                                     ((> skipped-tests 0) "yellow")
-                                     (else "green"))))
+                        (results
+                          (if (file-exists? logfile)
+                            (file-tail logfile 3)
+                            (list)))
+                        (result (apply string-append
+                                       (map
+                                         (lambda (line)
+                                           (string-append line "</br>"))
+                                         results))))
+                (write results)
+                (newline)
                 (execute report-row
                          `((name . ,name)
                            (command . ,command)
-                           (color . ,color)
                            (library-command . ,(if (assoc 'library-command implementation)
                                                  (cdr (assoc 'library-command implementation))
                                                  #f))
                            (name . ,name)
-                           (expected-passes . ,expected-passes)
-                           (expected-failures . ,expected-failures)
-                           (unexpected-failures . ,unexpected-failures)
-                           (skipped-tests . ,skipped-tests))
+                           (result . ,result))
                          out)
                 (newline out)))
             implementations)
