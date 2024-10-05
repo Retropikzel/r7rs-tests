@@ -1,6 +1,6 @@
 
 (define implementations
-  '(((name . chibi) (command . "chibi-scheme -I ./snow"))
+  '(((name . chibi) (command . "chibi-scheme -I ./snow/chibi"))
     ((name . chicken)
      (command . "csc -include-path ./snow/chibi -X r7rs -R r7rs")
      (library-command . "csc -include-path ./snow/chibi -X r7rs -R r7rs -s -J"))

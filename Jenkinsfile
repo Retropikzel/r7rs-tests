@@ -67,7 +67,7 @@ pipeline {
                     sh 'find . -name "*.o" -delete'
                     sh 'find . -name "*.o" -delete'
                     
-                    sh 'chibi-scheme -I ./snow r7rs-tests.scm'
+                    sh 'chibi-scheme -I ./snow/chibi r7rs-tests.scm'
                     sh 'for f in *.log; do cp -- "$f" "reports/chibi-$f"; done'
                     sh 'ls reports'
                     stash name: 'reports', includes: 'reports/*'

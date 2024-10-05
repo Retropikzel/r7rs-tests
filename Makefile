@@ -1,6 +1,6 @@
 test-chibi-r7rs-test:
 	
-	docker run -it -v ${PWD}:/workdir:z schemers/chibi bash -c "cd workdir && chibi-scheme -I ./snow r7rs-tests.scm"
+	docker run -it -v ${PWD}:/workdir:z schemers/chibi bash -c "cd workdir && chibi-scheme -I ./snow/chibi r7rs-tests.scm"
 
 
 test-chicken-r7rs-test:
